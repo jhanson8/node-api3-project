@@ -1,8 +1,14 @@
-const express = require('express');
+/* jshint esversion: 6 */
+const express = require("express");
 
 const server = express();
+server.use(express.json());
 
-server.get('/', (req, res) => {
+const userRouter = require("./users/userRouter.js");
+
+server.use("/api/users", userRouter);
+
+server.get("/", (req, res) => {
   res.send(`<h2>Let's write some middleware!</h2>`);
 });
 
