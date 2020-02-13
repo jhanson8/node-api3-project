@@ -4,13 +4,20 @@ const express = require("express");
 const router = express.Router();
 
 const userDb = require("./userDb.js");
+const postDb = require("../posts/postDb.js");
 
 router.post("/", validateUser, (req, res) => {
   // do your magic!
+  userDb.insert(req.body).then(user => {
+    res.status(201).json(user);
+  });
 });
 
 router.post("/:id/posts", validateUserId, validatePost, (req, res) => {
   // do your magic!
+  postDb.insert(req.body).then(post => {
+    res.status(201).json(post);
+  });
 });
 
 //GET List of all users
